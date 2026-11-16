@@ -1,0 +1,103 @@
+
+{
+  "BPM": 120,
+  "swing": 0,
+  "swingSubdivision": 8,
+  "timeSignature": [4, 4],
+  "keyNumber": 0,
+  "numberOfDisplayedTracks": 8,
+  "songName": "タイトル",
+  "trackUIOrderMap": [0, 1, 2, 3, 4, 5, 6, 7],
+  "masterGainValue": 1,
+  "EQLow": 0.5,
+  "EQMid": 0.5,
+  "EQHigh": 0.5,
+  "instrumentTracks": [
+    {
+      "gadgetType": 1,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": "ピアノ"
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    },
+    {
+      "gadgetType": 0,
+      "programNumber": 0,
+      "gainValue": 0.7952755905511811,
+      "instrumentTrackOnOff": true,
+      "programName": ""
+    }
+  ],
+  "seqData": [
+    [
+      {
+        "noteData": [
+          {"timing":0,"length":192,"pitch":66},
+          {"timing":192,"length":192,"pitch":70},
+          {"timing":192,"length":192,"pitch":68},
+          {"timing":384,"length":192,"pitch":71},
+          {"timing":384,"length":192,"pitch":67},
+          {"timing":576,"length":192,"pitch":69},
+          {"timing":432,"length":24,"pitch":63},
+          {"timing":288,"length":24,"pitch":62},
+          {"timing":600,"length":24,"pitch":64}
+        ]
+      },
+      {"noteData":[]},
+      {"noteData":[]},
+      {"noteData":[]}
+    ],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}],
+    [{"noteData":[]},{"noteData":[]},{"noteData":[]},{"noteData":[]}]
+  ],
+  "ruleTrackData": [
+    {}, {}, {}, {}, {}, {}, {}, {}
+  ]
+}
