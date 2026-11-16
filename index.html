@@ -1,0 +1,188 @@
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101522">
+  <title>Taiyaki Music AI</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">♫</span>
+    <div>
+      <b>TAIYAKI MUSIC AI</b>
+      <small>AI COMPOSITION STUDIO</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="newBtn" class="ghost">新規作成</button>
+    <label class="button ghost file-label">
+      .ktkを開く
+      <input id="openKtk" type="file" accept=".ktk">
+    </label>
+    <button id="exportBtn" class="primary">.ktkを書き出す</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">YOUR IDEAS, INTO MUSIC</div>
+      <h1>思い描いた音楽を、<em>かたちに。</em></h1>
+      <p>文章から作曲。細かく条件を指定して作曲。生成した曲はそのまま編集できます。</p>
+    </div>
+    <div class="status">
+      <span class="dot"></span> LOCAL STUDIO <b>v0.1</b>
+    </div>
+  </section>
+
+  <section class="workspace">
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-title">
+          <span>01 / AI COMPOSER</span>
+          <span class="tag">COMPOSE</span>
+        </div>
+
+        <div class="mode-switch">
+          <button class="mode active" data-mode="free">A 文章から作曲</button>
+          <button class="mode" data-mode="custom">B 条件を指定</button>
+        </div>
+
+        <label class="field-label" for="prompt">どんな曲を作りますか？</label>
+        <textarea id="prompt" rows="4"
+          placeholder="例：壮大なゲームのボス戦。最初は静かで、途中から激しくなる曲。"></textarea>
+
+        <div class="settings-grid">
+          <label>
+            テンポ
+            <span><input id="bpm" type="number" min="40" max="240" value="120"> BPM</span>
+          </label>
+          <label>
+            拍子
+            <select id="meter">
+              <option value="4/4">4/4</option>
+              <option value="3/4">3/4</option>
+              <option value="2/4">2/4</option>
+              <option value="6/8">6/8</option>
+              <option value="5/4">5/4</option>
+              <option value="7/8">7/8</option>
+            </select>
+          </label>
+          <label>
+            小節数
+            <select id="bars">
+              <option>4</option>
+              <option>8</option>
+              <option selected>16</option>
+              <option>32</option>
+            </select>
+          </label>
+          <label>
+            調
+            <select id="key">
+              <option value="0">C major / A minor</option>
+              <option value="2">D major / B minor</option>
+              <option value="4">E major / C# minor</option>
+              <option value="5">F major / D minor</option>
+              <option value="7">G major / E minor</option>
+              <option value="9">A major / F# minor</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="customHint" class="hint hidden">
+          Bモードではテンポ・拍子・小節数・調を指定して作曲します。
+        </div>
+
+        <button id="composeBtn" class="primary wide">
+          ✦ AIで作曲する
+        </button>
+        <p class="micro">
+          現在の作曲エンジンはブラウザ内で動く自動作曲ロジックです。
+          外部AI接続は次段階で追加します。
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <span>02 / TRACKS</span>
+          <button id="addTrack" class="small-btn">＋ 追加</button>
+        </div>
+        <div id="trackList" class="track-list"></div>
+      </div>
+
+      <div class="panel compact">
+        <div class="panel-title">
+          <span>03 / PROJECT</span>
+        </div>
+        <label class="field-label">曲名</label>
+        <input id="songName" class="text-input" value="新しい曲">
+        <div class="button-row">
+          <button id="playBtn" class="primary">▶ 再生</button>
+          <button id="stopBtn" class="ghost">■ 停止</button>
+        </div>
+        <div id="playState" class="micro">停止中</div>
+      </div>
+    </aside>
+
+    <section class="editor">
+      <div class="editor-head">
+        <div>
+          <div class="eyebrow">PIANO ROLL</div>
+          <h2>音符エディター</h2>
+        </div>
+        <div class="editor-tools">
+          <label>
+            表示トラック
+            <select id="activeTrack"></select>
+          </label>
+          <label>
+            音価
+            <select id="noteLength">
+              <option value="48">16分</option>
+              <option value="96">8分</option>
+              <option value="192" selected>4分</option>
+              <option value="384">2分</option>
+              <option value="768">全音符</option>
+            </select>
+          </label>
+          <button id="clearTrack" class="ghost">トラックを消去</button>
+        </div>
+      </div>
+
+      <div class="roll-wrap">
+        <div id="pianoRoll" class="piano-roll"></div>
+      </div>
+
+      <div class="roll-footer">
+        <span>クリック：音符追加</span>
+        <span>音符クリック：削除</span>
+        <span>音域 C3〜B5</span>
+      </div>
+
+      <div class="bottom-panel">
+        <div>
+          <b>作曲メモ</b>
+          <p id="compositionInfo">
+            曲を生成すると、ここに構成が表示されます。
+          </p>
+        </div>
+        <div class="legend">
+          <span><i class="melody"></i> メロディ</span>
+          <span><i class="chord"></i> 伴奏</span>
+          <span><i class="bass"></i> ベース</span>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
